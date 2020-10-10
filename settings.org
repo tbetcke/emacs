@@ -15,7 +15,8 @@
 
    #+begin_src emacs-lisp
    (menu-bar-mode -1)
-   (toggle-scroll-bar -1)
+   (add-to-list 'default-frame-alist
+                '(vertical-scroll-bars . nil))
    (tool-bar-mode -1)
    #+end_src
 
@@ -29,7 +30,7 @@
 ** Set default font
 
    #+begin_src emacs-lisp
-   (set-frame-font "Source Code Pro 14" nil t)
+   (add-to-list 'default-frame-alist '(font . "Source Code Pro 14"))
    #+end_src
 
 ** Use ibuffer
