@@ -1,0 +1,204 @@
+* Global Configuration
+** Disable bell 
+
+  #+begin_src emacs-lisp
+  (setq ring-bell-function 'ignore)
+  #+end_src
+
+** Disable splash screen
+
+   #+begin_src emacs-lisp
+   (setq inhibit-startup-message t)
+   #+end_src
+
+** Disable Menu, Scrollbar and Toolbar
+
+   #+begin_src emacs-lisp
+   (menu-bar-mode -1)
+   (toggle-scroll-bar -1)
+   (tool-bar-mode -1)
+   #+end_src
+
+** Enable file for custom set variables
+
+   #+begin_src emacs-lisp
+   (setq custom-file "~/.emacs.d/custom.el")
+   (load-file custom-file)
+   #+end_src
+
+** Set default font
+
+   #+begin_src emacs-lisp
+   (set-frame-font "Source Code Pro 14" nil t)
+   #+end_src
+
+** Use ibuffer
+
+   #+begin_src emacs-lisp
+   (defalias 'list-buffers 'ibuffer-other-window) ; always use ibuffer
+   #+end_src
+
+** Disable backup files
+
+   #+begin_src emacs-lisp
+   (setq auto-save-default nil)
+   (setq make-backup-files nil)
+   #+end_src
+
+** Highlight current line
+
+   #+begin_src emacs-lisp
+   (global-hl-line-mode t)
+   #+end_src
+
+** Show line numbers
+
+   #+begin_src emacs-lisp
+   (display-line-numbers-mode nil)
+   #+end_src
+
+* Packages
+
+** Org Bullets
+
+   Nice Bullets for org mode
+
+   #+begin_src emacs-lisp
+   (use-package org-bullets
+   :ensure t
+   :config
+   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+   #+end_src
+
+** Which-key
+
+   #+begin_src emacs-lisp
+   (use-package which-key
+   :ensure t
+   :config
+   (which-key-mode))
+   #+end_src
+
+** Try a new package
+
+   #+begin_src emacs-lisp
+   (use-package try
+   :ensure t)
+   #+end_src
+
+** Zenburn theme
+
+   #+begin_src emacs-lisp
+   (use-package zenburn-theme
+   :ensure t
+   :config (load-theme 'zenburn t))
+   #+end_src
+
+** Ace Window
+
+   Ace Window allows easy jumping between windows
+
+   #+begin_src emacs-lisp
+   (use-package ace-window
+   :ensure t
+   :init
+   (progn
+   (global-set-key [remap other-window] 'ace-window)
+   (custom-set-faces
+   '(aw-leading-char-face
+   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+   ))
+   #+end_src
+
+** Counsel
+
+   #+begin_src emacs-lisp
+   (use-package counsel
+   :ensure t
+   )
+   #+end_src
+
+** Swiper
+
+   #+begin_src emacs-lisp
+   (use-package swiper
+   :ensure try
+   :config
+   (progn
+   (ivy-mode 1)
+   (setq ivy-use-virtual-buffers t)
+   (global-set-key "\C-s" 'swiper)
+   (global-set-key (kbd "C-c C-r") 'ivy-resume)
+   (global-set-key (kbd "<f6>") 'ivy-resume)
+   (global-set-key (kbd "M-x") 'counsel-M-x)
+   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+   (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+   (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+   (global-set-key (kbd "<f1> l") 'counsel-load-library)
+   (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+   (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+   (global-set-key (kbd "C-c g") 'counsel-git)
+   (global-set-key (kbd "C-c j") 'counsel-git-grep)
+   (global-set-key (kbd "C-c k") 'counsel-ag)
+   (global-set-key (kbd "C-x l") 'counsel-locate)
+   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+   ))
+   #+end_src
+
+** Avy
+
+   Use avy for navigation within a page
+
+   #+begin_src emacs-lisp
+   (use-package avy
+   :ensure t
+   :bind ("M-s" . avy-goto-char))
+   #+end_src
+
+** Company Autocompletion
+
+   #+begin_src emacs-lisp
+   (use-package company
+   :ensure t
+   :config
+   (setq company-idle-delay 0)
+   (setq company-minimum-prefix-length 3)
+   (global-company-mode t))
+   #+end_src
+
+** Elpy for Python
+
+   #+begin_src emacs-lisp
+   (use-package elpy
+   :ensure t
+   :init
+   (elpy-enable))
+   #+end_src
+
+** Undo-Tree
+
+   #+begin_src emacs-lisp
+   (use-package undo-tree
+   :ensure t
+   :init
+   (global-undo-tree-mode))
+   #+end_src
+
+** Expand region
+
+   #+begin_src emacs-lisp
+   (use-package expand-region
+   :ensure t
+   :config
+   (global-set-key (kbd "C-=") 'er/expand-region))
+   #+end_src
+
+** iedit
+
+   Edit multiple occurences of an object simultaneously
+
+   #+begin_src emacs-lisp
+   (use-package iedit
+   :ensure t)
+   #+end_src
+
