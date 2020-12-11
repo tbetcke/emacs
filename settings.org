@@ -55,7 +55,7 @@
 ** Show line numbers
 
    #+begin_src emacs-lisp
-   (display-line-numbers-mode nil)
+   (global-display-line-numbers-mode nil)
    #+end_src
 
 * Packages
@@ -173,7 +173,12 @@
    (use-package elpy
    :ensure t
    :init
-   (elpy-enable))
+   (elpy-enable)
+   :config
+   (setq pyvenv-default-virtual-env-name "~/miniconda3/envs/dev")
+   :bind
+   (:map elpy-refactor-map
+               ("f" . elpy-black-fix-code)))
    #+end_src
 
 ** Undo-Tree
@@ -192,6 +197,13 @@
    :ensure t
    :config
    (global-set-key (kbd "C-=") 'er/expand-region))
+   #+end_src
+
+** Magit
+
+   #+begin_src emacs-lisp
+   (use-package magit
+   :ensure t)
    #+end_src
 
 ** iedit
